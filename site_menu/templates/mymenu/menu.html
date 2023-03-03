@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+{% load get_menu %}
+{% block title %}Список категорий{% endblock %}
+
+{% block content %}
+
+{% get_menu ~ slug %}
+
+{% endblock %}

@@ -18,7 +18,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #  Добавляем  свойство THEMENU, в который мы будем добавлять те модели,
 #  которые соединены с нашим приложением отношением OneToOneField.
 #  Указываем названия моделей, а НЕ приложений. Все модели указываются в нижнем регистре.
-THEMENU = ['our_model', 'our_model2']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -41,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'my_menu',
+    'mptt',
+    'django_mptt_admin',
+    'mymenu',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'site_menu.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # BASE_DIR / 'templatetags'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +69,12 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            # 'builtins': [
+            #     'templatetags.get_menu'
+            # ],
+            'libraries': {
+                'get_menu': 'templatetags.get_menu'
+            }
         },
     },
 ]

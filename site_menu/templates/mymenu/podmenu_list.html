@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %} Подпункты меню {{title}}{% endblock %}
+{% load mptt_tags %}
+{% block content %}
+<div><a href="/new_menu/"><h3>Вернуться в главное меню</h3></a></div>
+<main>
+    <section>
+	<div class="container">
+		<ul>
+		{% for p in parent %}
+		<li><a href="{{p.get_absolute_url}}">
+			{{ p }}</a>
+			{% if p.children.all and p.title == title %}
+				<ul>
+					{% for ch in p.children.all %}
+					<li><a href="{{ch.get_absolute_url}}">
+						{{ ch }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</li>
+		{% endfor %}
+		</ul>
+	</div>
+    </section>
+	<div>
+		{% for punkt in categories %}
+		<div>
+				<h3>{{punkt}}</h3>
+		</div>
+		{% endfor %}
+    </div>
+</main>
+{% endblock %}

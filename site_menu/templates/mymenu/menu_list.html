@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+{% load get_menu %}
+{% block title %}Список категорий{% endblock %}
+
+{% block content %}
+
+<div>
+    <div>
+	<ul>
+	{% recursetree object_list %}
+	    <li>
+		<a href="{{node.get_absolute_url}}">{{node.title}}</a>
+		{% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+		{% endif %}
+	    </li>
+	{% endrecursetree %}
+	</ul>
+    </div>
+
+		{% get_menu 'deshevye' %}
+
+
+</div>
+
+{% endblock %}
